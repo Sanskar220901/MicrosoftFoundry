@@ -28,19 +28,19 @@ The model is not magic. It is just a service that receives a prompt and returns 
 
 ```mermaid
 flowchart LR
-    A[.env file\nFOUNDRY_PROJECT_ENDPOINT\nMODEL_DEPLOYMENT_NAME] --> B[load_dotenv()]
+    A[".env file<br/>FOUNDRY_PROJECT_ENDPOINT<br/>MODEL_DEPLOYMENT_NAME"] --> B[load_dotenv()]
     B --> C[os.getenv()]
     C --> D[foundry_project_endpoint]
     C --> E[model_deployment_name]
 
-    D --> F[AIProjectClient(\n endpoint,\n DefaultAzureCredential()\n)]
-    E --> G[openai_client = project_client.get_openai_client()]
+    D --> F["AIProjectClient<br/>endpoint + DefaultAzureCredential()"]
+    E --> G["openai_client = project_client.get_openai_client()"]
     F --> G
 
-    G --> H[responses.create(\n model,\n instructions,\n input\n)]
+    G --> H["responses.create<br/>model + instructions + input"]
     H --> I[AI model returns response]
     I --> J[response.output_text]
-    J --> K[print(...) ]
+    J --> K[print(...)]
 
     K --> L[Answer shown in notebook]
 ```
