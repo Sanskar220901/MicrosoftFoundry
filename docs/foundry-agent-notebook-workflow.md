@@ -31,7 +31,7 @@ The analogy is only a memory aid. In the notebook, Azure and the model service p
 
 ## Open the interactive page on GitHub
 
-GitHub Pages is not enabled for this repository yet. To publish the interactive diagram, open **Settings -> Pages**, set the build source to **GitHub Actions**, then run the `Publish workflow diagram` workflow from the **Actions** tab if the initial push ran before Pages was enabled. The workflow publishes only the standalone diagram as the Pages home page.
+The publishing workflow attempts to enable GitHub Pages and deploy the standalone diagram. If GitHub blocks automatic enablement, open **Settings -> Pages**, set the build source to **GitHub Actions**, then rerun `Publish workflow diagram` from the **Actions** tab.
 
 ## Cell-by-cell guide
 
