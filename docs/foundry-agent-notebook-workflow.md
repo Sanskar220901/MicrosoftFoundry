@@ -81,16 +81,6 @@ Cell 14 is empty and can be ignored.
 - **Conversation:** the ongoing chat session that groups messages together.
 
 Memory hook: **the agent is the recipe; the conversation is the current order ticket.**
-
-## The Python ideas in this notebook
-
-- `=` stores a value in a variable.
-- `import` makes installed tools available.
-- A function call such as `input(...)` asks for or performs work.
-- `if` chooses between paths.
-- `while` repeats a block until its condition becomes false.
-- `print(...)` displays text.
-
 You do not need to memorize the SDK calls. Remember the order and purpose: **prepare, connect, create, chat, display**.
 
 ## Keep settings private
