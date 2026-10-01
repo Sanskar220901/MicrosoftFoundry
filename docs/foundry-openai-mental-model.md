@@ -1,4 +1,4 @@
-# Microsoft Foundry + OpenAI: Mental Model
+# Microsoft Foundry + OpenAI: Mental Model for Beginners
 
 This notebook is a small system pattern:
 
@@ -25,7 +25,7 @@ flowchart LR
     G --> H["Printed answer"]
 ```
 
-This is the Archify-style pattern we will use going forward:
+This is the cleaner architecture-first pattern we can use when explaining system flow:
 
 - short labels
 - left-to-right flow
@@ -323,9 +323,9 @@ One simple memory sentence:
 
 ---
 
-## How to use this style in future notes
+## A good pattern for future notes
 
-A good pattern for future docs in this repo is:
+A helpful pattern for future docs in this repo is:
 
 - short labels
 - system flow first, code second
@@ -333,7 +333,7 @@ A good pattern for future docs in this repo is:
 - simple analogies for beginners
 - architecture meaning before syntax details
 
-This is a practical note for learning and documentation, not a rigid project rule.
+This is a practical learning pattern rather than a rigid project rule.
 
 ---
 
