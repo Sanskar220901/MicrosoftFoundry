@@ -24,24 +24,30 @@ The model is not magic. It is just a service that receives a prompt and returns 
 
 ---
 
-## Mermaid mental model
+## Archify-style mental model
+
+This is the same flow, but drawn in a cleaner architecture style so it is easier to remember and explain.
 
 ```mermaid
 flowchart LR
-    A["Config values"] --> B["Load .env"]
-    B --> C["Read values"]
-    C --> D["Project URL"]
-    C --> E["Model name"]
-
-    D --> F["Create project client"]
-    E --> G["Get OpenAI client"]
-    F --> G
-
-    G --> H["Send prompt"]
-    H --> I["Model returns answer"]
-    I --> J["Print result"]
-    J --> K["Answer shown"]
+    A["Notebook user"] --> B["Config values"]
+    B --> C["Azure login"]
+    C --> D["Foundry project"]
+    D --> E["OpenAI client"]
+    E --> F["Model deployment"]
+    F --> G["Answer returned"]
+    G --> H["Printed output"]
 ```
+
+### Archify principles we will use going forward
+
+- Keep labels short and meaningful
+- Focus on the relationship between components, not syntax
+- Use a simple left-to-right flow for reading
+- Make the diagram explain what is happening, not just what the code says
+- Avoid overloaded node text such as long function names
+
+This is the pattern I will use for future documentation, diagrams, and architecture notes in this project.
 
 ---
 
