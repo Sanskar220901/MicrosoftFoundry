@@ -4,7 +4,9 @@ This notebook builds a small Foundry agent and lets you chat with it. The big pi
 
 > Prepare tools -> load settings -> connect to Foundry -> create the agent -> open a conversation -> chat until you exit
 
-[Open or download the interactive workflow diagram](foundry-agent-chat-workflow.html). To explore it interactively, download the HTML file and open it in a browser.
+**Interactive diagram:** [Open the Flow view in dark mode](https://sanskar220901.github.io/MicrosoftFoundry/?theme=dark). The HTML is also committed as [foundry-agent-chat-workflow-interactive.html](foundry-agent-chat-workflow-interactive.html).
+
+Hover over a node or connection to preview its path. Use the diagram's Live/Still control to play or pause the animated trace. GitHub's source and Markdown views do not run interactive HTML; the Pages link works after the one-time setup below.
 
 ![Foundry agent notebook workflow](foundry-agent-chat-workflow-preview.png)
 
@@ -26,6 +28,10 @@ Think of it like setting up a small restaurant:
 - `exit` or `quit` closes the ticket and stops the loop.
 
 The analogy is only a memory aid. In the notebook, Azure and the model service perform the actual work.
+
+## Open the interactive page on GitHub
+
+GitHub Pages is not enabled for this repository yet. To publish the interactive diagram, open **Settings -> Pages**, set the build source to **GitHub Actions**, then run the `Publish workflow diagram` workflow from the **Actions** tab if the initial push ran before Pages was enabled. The workflow publishes only the standalone diagram as the Pages home page.
 
 ## Cell-by-cell guide
 

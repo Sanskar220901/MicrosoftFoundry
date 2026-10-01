@@ -4,7 +4,9 @@
   "meta": {
     "title": "Foundry Agent Notebook Workflow",
     "subtitle": "From notebook setup to an interactive chat",
-    "output": "docs/foundry-agent-chat-workflow.html",
+    "output": "docs/foundry-agent-chat-workflow-interactive.html",
+    "animation": "trace",
+    "visual_preset": "signal-flow",
     "quality_profile": "showcase",
     "repository": {
       "url": "https://github.com/Sanskar220901/MicrosoftFoundry.git",
