@@ -323,18 +323,17 @@ One simple memory sentence:
 
 ---
 
-## Archify documentation rule for future docs
+## How to use this style in future notes
 
-From now on, future documentation in this repo should follow these rules:
+A good pattern for future docs in this repo is:
 
-- use short labels
-- show the system as a flow, not as raw code
-- explain the purpose of each block in plain English
-- keep the diagram readable at a glance
-- use simple analogies for beginners
-- prefer architecture meaning over syntax detail
+- short labels
+- system flow first, code second
+- plain-English explanation of each block
+- simple analogies for beginners
+- architecture meaning before syntax details
 
-That is the standard we will apply to future notebooks and project docs.
+This is a practical note for learning and documentation, not a rigid project rule.
 
 ---
 
