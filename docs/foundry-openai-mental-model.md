@@ -1,4 +1,4 @@
-# Microsoft Foundry + OpenAI: Archify Mental Model
+# Microsoft Foundry + OpenAI: Mental Model
 
 This notebook is a small system pattern:
 
