@@ -1,0 +1,170 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Foundry Agent Notebook Workflow",
+    "subtitle": "From notebook setup to an interactive chat",
+    "output": "docs/foundry-agent-chat-workflow.html",
+    "quality_profile": "showcase",
+    "repository": {
+      "url": "https://github.com/Sanskar220901/MicrosoftFoundry.git",
+      "provider": "github",
+      "link_mode": "web",
+      "revision": "8cbeea9ac11a3fec6b90c56d48d21dd9626b66d6"
+    }
+  },
+  "lanes": [
+    { "id": "notebook", "label": "Python Notebook" },
+    { "id": "foundry", "label": "Microsoft Foundry" },
+    { "id": "learner", "label": "You" },
+    { "id": "ending", "label": "Session ends", "variant": "exception" }
+  ],
+  "phases": [
+    { "id": "prepare", "label": "Prepare", "fromCol": 0, "toCol": 1 },
+    { "id": "agent_setup", "label": "Create the agent", "fromCol": 2, "toCol": 3 },
+    { "id": "chat", "label": "Chat", "fromCol": 4, "toCol": 5, "variant": "emphasis" }
+  ],
+  "mainPath": [
+    "prepare_tools",
+    "load_settings",
+    "connect_project",
+    "create_agent",
+    "open_conversation",
+    "enter_message",
+    "run_agent",
+    "show_reply"
+  ],
+  "nodes": [
+    {
+      "id": "prepare_tools",
+      "lane": "notebook",
+      "col": 0,
+      "width": 124,
+      "type": "backend",
+      "label": "Get tools",
+      "sublabel": "install + import",
+      "sources": [
+        { "path": "AgentService/Getting_Started/agent_run.ipynb", "line": 26, "label": "Install packages" },
+        { "path": "AgentService/Getting_Started/agent_run.ipynb", "line": 44, "end_line": 47, "label": "Import libraries" }
+      ]
+    },
+    {
+      "id": "load_settings",
+      "lane": "notebook",
+      "col": 1,
+      "width": 124,
+      "type": "backend",
+      "label": "Load settings",
+      "sublabel": "project + model",
+      "sources": [
+        { "path": "AgentService/Getting_Started/agent_run.ipynb", "line": 48, "end_line": 51, "label": "Read environment" }
+      ]
+    },
+    {
+      "id": "connect_project",
+      "lane": "notebook",
+      "col": 2,
+      "width": 124,
+      "type": "security",
+      "label": "Connect",
+      "sublabel": "identity + URL",
+      "sources": [
+        { "path": "AgentService/Getting_Started/agent_run.ipynb", "line": 69, "end_line": 72, "label": "Create project client" }
+      ]
+    },
+    {
+      "id": "create_agent",
+      "lane": "foundry",
+      "col": 3,
+      "width": 124,
+      "type": "backend",
+      "label": "Create agent",
+      "sublabel": "model + rules",
+      "sources": [
+        { "path": "AgentService/Getting_Started/agent_run.ipynb", "line": 92, "end_line": 103, "label": "Create agent" }
+      ]
+    },
+    {
+      "id": "open_conversation",
+      "lane": "foundry",
+      "col": 4,
+      "width": 124,
+      "type": "backend",
+      "label": "Start chat",
+      "sublabel": "client + chat ID",
+      "sources": [
+        { "path": "AgentService/Getting_Started/agent_run.ipynb", "line": 121, "end_line": 126, "label": "Create conversation" }
+      ]
+    },
+    {
+      "id": "enter_message",
+      "lane": "learner",
+      "col": 4,
+      "width": 124,
+      "type": "external",
+      "label": "Ask or exit",
+      "sublabel": "exit stops loop",
+      "sources": [
+        { "path": "AgentService/Getting_Started/agent_run.ipynb", "line": 146, "end_line": 150, "label": "Read input and check exit" }
+      ]
+    },
+    {
+      "id": "run_agent",
+      "lane": "foundry",
+      "col": 5,
+      "width": 124,
+      "type": "backend",
+      "label": "Send prompt",
+      "sublabel": "use agent + chat ID",
+      "sources": [
+        { "path": "AgentService/Getting_Started/agent_run.ipynb", "line": 152, "end_line": 163, "label": "Send agent request" }
+      ]
+    },
+    {
+      "id": "show_reply",
+      "lane": "notebook",
+      "col": 5,
+      "width": 124,
+      "type": "frontend",
+      "label": "Print reply",
+      "sublabel": "print returned text",
+      "sources": [
+        { "path": "AgentService/Getting_Started/agent_run.ipynb", "line": 163, "label": "Print response" }
+      ]
+    },
+    {
+      "id": "end_chat",
+      "lane": "ending",
+      "col": 4,
+      "width": 124,
+      "type": "external",
+      "label": "Stop chat",
+      "sublabel": "stop asking for input",
+      "sources": [
+        { "path": "AgentService/Getting_Started/agent_run.ipynb", "line": 148, "end_line": 150, "label": "Exit condition" }
+      ]
+    }
+  ],
+  "edges": [
+    { "id": "prepare-config", "from": "prepare_tools", "to": "load_settings", "label": "read configuration", "variant": "default" },
+    { "id": "config-project", "from": "load_settings", "to": "connect_project", "label": "endpoint and model", "variant": "default" },
+    { "id": "project-agent", "from": "connect_project", "to": "create_agent", "label": "create version", "variant": "emphasis" },
+    { "id": "agent-conversation", "from": "create_agent", "to": "open_conversation", "label": "agent is ready", "variant": "default" },
+    { "id": "conversation-input", "from": "open_conversation", "to": "enter_message", "label": "start chatting", "variant": "default" },
+    { "id": "input-request", "from": "enter_message", "to": "run_agent", "label": "message", "variant": "emphasis" },
+    { "id": "request-reply", "from": "run_agent", "to": "show_reply", "label": "response text", "variant": "default" },
+    { "id": "reply-again", "from": "show_reply", "to": "enter_message", "label": "next message", "variant": "dashed", "role": "return" },
+    { "id": "input-exit", "from": "enter_message", "to": "end_chat", "label": "exit or quit", "variant": "security", "role": "branch" }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Remember the difference",
+      "items": [
+        "Agent version = reusable setup, like a recipe.",
+        "Conversation = one continuing chat, like its order ticket.",
+        "The loop repeats for messages and stops on exit or quit."
+      ]
+    }
+  ]
+}
