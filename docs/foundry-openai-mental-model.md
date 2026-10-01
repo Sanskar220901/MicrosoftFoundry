@@ -1,151 +1,77 @@
-# Microsoft Foundry + OpenAI: Mental Model for Beginners
+# Microsoft Foundry + OpenAI: Archify Mental Model
 
-This notebook is a small example of one thing:
+This notebook is a small system pattern:
 
-> It connects to a Microsoft Foundry project, logs in securely, asks a model a question, and prints the answer.
+> It loads configuration, signs in securely, connects to a Foundry project, sends a prompt to a deployed model, and prints the result.
 
-If you only remember one sentence, remember this:
+If you remember only one sentence, remember this:
 
-> Load settings -> sign in -> connect to project -> send prompt -> show response
-
----
-
-## The big idea
-
-Think of this notebook like ordering food at a restaurant.
-
-- The `.env` file is your menu and order details.
-- `DefaultAzureCredential()` is the waiter who proves who you are.
-- `AIProjectClient` is the kitchen connection that knows where your restaurant is.
-- `openai_client.responses.create(...)` is you actually placing the order.
-- `response.output_text` is the food that arrives back from the kitchen.
-
-The model is not magic. It is just a service that receives a prompt and returns text.
+> Config -> Auth -> Project -> Prompt -> Output
 
 ---
 
-## Archify-style mental model
+## Architecture view
 
-This is the same flow, but drawn in a cleaner architecture style so it is easier to remember and explain.
+This is the system as a simple architecture diagram.
 
 ```mermaid
 flowchart LR
-    A["Notebook user"] --> B["Config values"]
-    B --> C["Azure login"]
+    A["User in notebook"] --> B["Config values"]
+    B --> C["Azure identity"]
     C --> D["Foundry project"]
     D --> E["OpenAI client"]
     E --> F["Model deployment"]
-    F --> G["Answer returned"]
-    G --> H["Printed output"]
+    F --> G["Response"]
+    G --> H["Printed answer"]
 ```
 
-### Archify principles we will use going forward
+This is the Archify-style pattern we will use going forward:
 
-- Keep labels short and meaningful
-- Focus on the relationship between components, not syntax
-- Use a simple left-to-right flow for reading
-- Make the diagram explain what is happening, not just what the code says
-- Avoid overloaded node text such as long function names
-
-This is the pattern I will use for future documentation, diagrams, and architecture notes in this project.
+- short labels
+- left-to-right flow
+- one clear idea per box
+- no syntax-heavy text clutter
+- focus on why the system exists, not just what the code writes
 
 ---
 
-## Step-by-step explanation, cell by cell
+## What each part is doing
 
-### 1) Install the required libraries
-
-```python
-%pip install azure-ai-projects==2.0.0b2 openai==1.109.1 python-dotenv azure-identity
-```
-
-This installs the Python tools needed for the notebook.
-
-Simple explanation:
-
-- `azure-ai-projects` lets Python talk to Azure AI Foundry
-- `openai` gives us the OpenAI-style client
-- `python-dotenv` lets us read values from a `.env` file
-- `azure-identity` helps us log in to Azure without hardcoding secrets
-
-Analogy:
-
-This is like getting the right tools and ingredients before cooking.
-
----
-
-### 2) Import the libraries
-
-```python
-import os
-from dotenv import load_dotenv
-from azure.identity import DefaultAzureCredential
-from azure.ai.projects import AIProjectClient
-```
-
-This brings in the functions/classes we will use.
-
-Simple explanation:
-
-- `import os` gives access to environment variables
-- `load_dotenv` reads values from the `.env` file
-- `DefaultAzureCredential` helps us authenticate to Azure
-- `AIProjectClient` is the connection object for the Foundry project
-
-Analogy:
-
-This is like unpacking your tools on the workbench before starting the task.
-
----
-
-### 3) Load environment variables
-
-```python
-load_dotenv()
-```
-
-This tells Python: "look for a `.env` file and load its values into the program."
-
-Simple explanation:
-
-The `.env` file usually contains things like:
+### 1) Local config
+The `.env` file contains values like:
 
 ```text
 FOUNDRY_PROJECT_ENDPOINT=https://your-project-url
-MODEL_DEPLOYMENT_NAME=gpt-4o-mini
+MODEL_DEPLOYMENT_NAME=my-model
 ```
 
-This keeps important settings separate from the code.
+This is the notebook's setup file. It keeps important values outside the code so we do not hardcode secrets or connection details.
 
-Analogy:
+Memory hook:
 
-Instead of writing the address and order details directly on the table, you keep them in a note card you can read anytime.
+> The config file is the address book.
 
 ---
 
-### 4) Get the endpoint and model name
+### 2) Azure identity
+This line is the login step:
 
 ```python
-foundry_project_endpoint = os.getenv("FOUNDRY_PROJECT_ENDPOINT")
-model_deployment_name = os.getenv("MODEL_DEPLOYMENT_NAME")
+from azure.identity import DefaultAzureCredential
 ```
 
-This reads the values from the environment.
+It tells Python: "Use my Azure login credentials to prove I am allowed to access this project."
 
-Simple explanation:
+This is important because the system must know who you are before it can talk to Azure resources.
 
-- `os.getenv("FOUNDRY_PROJECT_ENDPOINT")` gets the project URL
-- `os.getenv("MODEL_DEPLOYMENT_NAME")` gets the model name to use
+Memory hook:
 
-If the variable does not exist, Python returns `None`.
-
-Analogy:
-
-This is like grabbing the address and the name of the dish from your notes before you order.
+> Identity is the ID card.
 
 ---
 
-### 5) Create the AI Foundry project client
+### 3) Foundry project connection
+This is the project access point:
 
 ```python
 project_client = AIProjectClient(
@@ -154,40 +80,38 @@ project_client = AIProjectClient(
 )
 ```
 
-This creates the object that points to your Azure AI Foundry project.
+This creates a connection to your Azure AI Foundry project.
 
-Simple explanation:
+The important idea is simple:
 
-- `endpoint` tells it where the project is located
-- `DefaultAzureCredential()` tells it how to log in to Azure
+- endpoint = where the project lives
+- credential = who is allowed to access it
 
-This does not send any prompt yet. It simply creates a connection object.
+Memory hook:
 
-Analogy:
-
-This is like opening the restaurant connection and telling the system where the kitchen is and who you are.
+> The project client is the front desk that knows the office address.
 
 ---
 
-### 6) Get the OpenAI-compatible client
+### 4) OpenAI-compatible client
+This step converts the Azure project client into a model-calling client:
 
 ```python
 openai_client = project_client.get_openai_client()
 ```
 
-This converts the Azure project client into a client that works like the OpenAI client you are used to.
+Now the code can use the same style of calls you would use with OpenAI, but the request is actually routed through your Foundry project.
 
-Simple explanation:
+This is a compatibility layer.
 
-The Foundry project is the Azure-side wrapper. This method gives you the model-calling interface.
+Memory hook:
 
-Analogy:
-
-This is like getting the specific ordering system the restaurant uses so you can place your order.
+> It is like switching from a general front desk to a specialist desk for model requests.
 
 ---
 
-### 7) Send a prompt to the model
+### 5) Model deployment
+This is the actual LLM call:
 
 ```python
 response = openai_client.responses.create(
@@ -197,98 +121,229 @@ response = openai_client.responses.create(
 )
 ```
 
-This is the main action of the notebook.
+Here is the real action:
 
-Simple explanation:
+- `model` tells Azure which deployed model to use
+- `instructions` guides the tone and behavior
+- `input` is the actual question
 
-- `model` = which model should answer
-- `instructions` = how the assistant should behave
-- `input` = the actual user question
+This is the notebook's main task.
 
-This is the moment where the model is asked to respond.
+Memory hook:
 
-Analogy:
-
-This is like handing a waiter your order: the dish name is the model, the instructions are extra cooking preferences, and the input is the exact request.
+> The model is the chef. The prompt is the order.
 
 ---
 
-### 8) Print the response
+### 6) Output
+This line shows the answer:
 
 ```python
 print(f"Response output: {response.output_text}")
 ```
 
-This displays the returned answer in the notebook.
+The model returns text, and Python prints it. This is the final stage of the flow.
 
-Simple explanation:
+Memory hook:
 
-- `response.output_text` is the text produced by the model
-- `print(...)` shows it in the output area
+> The kitchen sends the meal, and the notebook serves it to the screen.
 
-Analogy:
+---
 
-This is like receiving the dish from the kitchen and showing it to the customer.
+## Cell-by-cell explanation
+
+### Cell 1: Install required libraries
+
+```python
+%pip install azure-ai-projects==2.0.0b2 openai==1.109.1 python-dotenv azure-identity
+```
+
+What this does:
+
+- installs the tools needed to connect to Azure AI Foundry
+- gives Python the packages for environment variables and Azure auth
+- prepares the notebook to call the model
+
+Why it matters:
+
+Without these packages, the notebook cannot talk to Azure or use the OpenAI-style client.
+
+---
+
+### Cell 2: Import the libraries
+
+```python
+import os
+from dotenv import load_dotenv
+from azure.identity import DefaultAzureCredential
+from azure.ai.projects import AIProjectClient
+```
+
+What this does:
+
+- imports environment access
+- imports environment loader
+- imports Azure identity support
+- imports the Foundry project client
+
+Why it matters:
+
+This is the setup phase. The code is preparing the building blocks that the notebook will use later.
+
+---
+
+### Cell 3: Read config values
+
+```python
+load_dotenv()
+foundry_project_endpoint = os.getenv("FOUNDRY_PROJECT_ENDPOINT")
+model_deployment_name = os.getenv("MODEL_DEPLOYMENT_NAME")
+```
+
+What this does:
+
+- loads values from a local `.env` file
+- reads the endpoint for the Foundry project
+- reads the model deployment name to use
+
+Why it matters:
+
+It avoids hardcoded secrets and makes the project easier to reuse in different environments.
+
+---
+
+### Cell 4: Create project client
+
+```python
+project_client = AIProjectClient(
+    endpoint=foundry_project_endpoint,
+    credential=DefaultAzureCredential()
+)
+```
+
+What this does:
+
+- tells the code where the Azure AI Foundry project is
+- tells Azure who is trying to connect
+
+Why it matters:
+
+This is the actual connection step.
+
+---
+
+### Cell 5: Create OpenAI-style client
+
+```python
+openai_client = project_client.get_openai_client()
+```
+
+What this does:
+
+- exposes the Foundry project through an OpenAI-compatible interface
+
+Why it matters:
+
+This lets the code use familiar model call patterns without needing a completely different API style.
+
+---
+
+### Cell 6: Send the request
+
+```python
+response = openai_client.responses.create(
+    model=model_deployment_name,
+    instructions="You are a helpful AI assistant.",
+    input="Can you tell me about Microsoft Foundry?"
+)
+```
+
+What this does:
+
+- selects the right deployed model
+- tells the model how to behave
+- sends the actual user question
+
+Why it matters:
+
+This is the moment the notebook asks the AI for an answer.
+
+---
+
+### Cell 7: Show the answer
+
+```python
+print(f"Response output: {response.output_text}")
+```
+
+What this does:
+
+- prints the text returned by the model
+
+Why it matters:
+
+Without this step, the user would not see the answer in the notebook output.
 
 ---
 
 ## Why this pattern matters
 
-This pattern is used in almost every AI app:
+This is the basic AI app pattern:
 
-1. Configure the project
-2. Authenticate securely
-3. Create a client
-4. Send prompt/instructions
-5. Read the model output
+1. configuration
+2. identity
+3. project access
+4. model call
+5. output display
 
-It is the basic building block of AI workflows.
-
-Once you understand this, you can reuse it for:
+You will reuse this pattern again and again in:
 
 - chat apps
-- document analysis
-- AI agents
-- summarization tools
 - Q&A systems
+- document processing
+- AI assistants
+- agent workflows
 
 ---
 
-## Easy memory sentence
+## Beginner memory model
 
-Use this as your internal cheat sheet:
+Think of the notebook as a delivery flow:
 
-> "Load values, log in, connect, ask, print."
+- `.env` file = address and order details
+- Azure login = proof of identity
+- Foundry project = the destination
+- OpenAI client = the ordering system
+- model = the worker that answers
+- output = the final result on screen
 
-Or even shorter:
+One simple memory sentence:
 
-> "Config -> Auth -> Client -> Prompt -> Output"
-
-That is the real mental model behind this notebook.
+> Config, login, connect, ask, answer.
 
 ---
 
-## Beginner-friendly summary
+## Archify documentation rule for future docs
 
-This notebook is basically a "hello world" for Azure AI Foundry + OpenAI.
+From now on, future documentation in this repo should follow these rules:
 
-It is doing less than it looks like:
+- use short labels
+- show the system as a flow, not as raw code
+- explain the purpose of each block in plain English
+- keep the diagram readable at a glance
+- use simple analogies for beginners
+- prefer architecture meaning over syntax detail
 
-- it is not doing anything complicated
-- it is just connecting to a model service and asking a question
-- the tough-looking code is mostly just setup boilerplate
-
-Once you know the pattern, you can swap in different questions, different models, and different workflows without memorizing every line.
+That is the standard we will apply to future notebooks and project docs.
 
 ---
 
 ## The one thing to remember
 
-The key to understanding this code is not the syntax alone.
-The key is the flow:
+The real lesson is not the exact syntax. The real lesson is the flow:
 
 ```text
-.env file  ->  Python reads values  ->  Azure login  ->  project connection  ->  model call  ->  answer shown
+config values -> Azure login -> Foundry project -> model call -> response -> printed answer
 ```
 
-That flow is the real lesson.
+That is the mental model behind this notebook.
