@@ -1,0 +1,211 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Foundry Code Interpreter Notebook",
+    "subtitle": "Upload a CSV, ask for a chart, and retrieve the generated file",
+    "output": ".archify/workflow-code-interpreter-20261005-114243/code-interpreter-analysis.html",
+    "animation": "trace",
+    "visual_preset": "signal-flow",
+    "quality_profile": "showcase",
+    "repository": {
+      "url": "https://github.com/Sanskar220901/MicrosoftFoundry.git",
+      "provider": "github",
+      "link_mode": "web",
+      "revision": "a9a8ba2248c55502b365ee88354c32ba6e600eea"
+    }
+  },
+  "lanes": [
+    { "id": "notebook", "label": "Python Notebook" },
+    { "id": "foundry", "label": "Microsoft Foundry" },
+    { "id": "interpreter", "label": "Code Interpreter" },
+    { "id": "local", "label": "Local output" },
+    { "id": "no_file", "label": "No file returned", "variant": "exception" }
+  ],
+  "phases": [
+    { "id": "prepare", "label": "Prepare", "fromCol": 0, "toCol": 1 },
+    { "id": "configure", "label": "Set up agent", "fromCol": 2, "toCol": 3 },
+    { "id": "analyze", "label": "Analyze + retrieve", "fromCol": 4, "toCol": 5, "variant": "emphasis" }
+  ],
+  "mainPath": [
+    "setup",
+    "upload_csv",
+    "create_agent",
+    "agent_version",
+    "create_conversation",
+    "ask_for_chart",
+    "inspect_citation",
+    "download_chart"
+  ],
+  "nodes": [
+    {
+      "id": "setup",
+      "lane": "notebook",
+      "col": 0,
+      "width": 112,
+      "type": "backend",
+      "label": "Set up clients",
+      "sublabel": "config + sign-in",
+      "sources": [
+        { "path": "AgentService/Code_Interpreter/code_interpreter.ipynb", "line": 35, "label": "Install packages" },
+        { "path": "AgentService/Code_Interpreter/code_interpreter.ipynb", "line": 53, "end_line": 62, "label": "Load settings" },
+        { "path": "AgentService/Code_Interpreter/code_interpreter.ipynb", "line": 80, "end_line": 101, "label": "Create clients" }
+      ]
+    },
+    {
+      "id": "upload_csv",
+      "lane": "notebook",
+      "col": 1,
+      "width": 112,
+      "type": "backend",
+      "label": "Upload CSV",
+      "sublabel": "product CSV",
+      "sources": [
+        { "path": "AgentService/Code_Interpreter/code_interpreter.ipynb", "line": 119, "end_line": 121, "label": "Upload input file" }
+      ]
+    },
+    {
+      "id": "files_service",
+      "lane": "foundry",
+      "col": 1,
+      "width": 112,
+      "type": "cloud",
+      "label": "Files service",
+      "sublabel": "returns a file ID",
+      "sources": [
+        { "path": "AgentService/Code_Interpreter/code_interpreter.ipynb", "line": 120, "end_line": 121, "label": "Create uploaded file" }
+      ]
+    },
+    {
+      "id": "create_agent",
+      "lane": "notebook",
+      "col": 2,
+      "width": 112,
+      "type": "backend",
+      "label": "Define agent",
+      "sublabel": "model + tool settings",
+      "sources": [
+        { "path": "AgentService/Code_Interpreter/code_interpreter.ipynb", "line": 139, "end_line": 157, "label": "Create agent version" }
+      ]
+    },
+    {
+      "id": "agent_version",
+      "lane": "foundry",
+      "col": 2,
+      "width": 112,
+      "type": "backend",
+      "label": "Agent version",
+      "sublabel": "interpreter ready",
+      "sources": [
+        { "path": "AgentService/Code_Interpreter/code_interpreter.ipynb", "line": 141, "end_line": 154, "label": "Agent definition" }
+      ]
+    },
+    {
+      "id": "create_conversation",
+      "lane": "notebook",
+      "col": 3,
+      "width": 112,
+      "type": "backend",
+      "label": "New conversation",
+      "sublabel": "save chat ID",
+      "sources": [
+        { "path": "AgentService/Code_Interpreter/code_interpreter.ipynb", "line": 175, "end_line": 177, "label": "Create conversation" }
+      ]
+    },
+    {
+      "id": "ask_for_chart",
+      "lane": "notebook",
+      "col": 4,
+      "width": 112,
+      "type": "frontend",
+      "label": "Ask for chart",
+      "sublabel": "products vs prices",
+      "sources": [
+        { "path": "AgentService/Code_Interpreter/code_interpreter.ipynb", "line": 195, "end_line": 206, "label": "Send chart request" }
+      ]
+    },
+    {
+      "id": "code_interpreter",
+      "lane": "interpreter",
+      "col": 5,
+      "width": 112,
+      "type": "backend",
+      "label": "Run code tool",
+      "sublabel": "container makes chart",
+      "sources": [
+        { "path": "AgentService/Code_Interpreter/code_interpreter.ipynb", "line": 147, "end_line": 151, "label": "Tool configured" },
+        { "path": "AgentService/Code_Interpreter/code_interpreter.ipynb", "line": 197, "label": "Chart requested" }
+      ]
+    },
+    {
+      "id": "inspect_citation",
+      "lane": "notebook",
+      "col": 5,
+      "width": 112,
+      "type": "backend",
+      "label": "Check citation",
+      "sublabel": "find output citation",
+      "sources": [
+        { "path": "AgentService/Code_Interpreter/code_interpreter.ipynb", "line": 228, "end_line": 241, "label": "Inspect response annotations" }
+      ]
+    },
+    {
+      "id": "download_chart",
+      "lane": "local",
+      "col": 5,
+      "width": 112,
+      "type": "database",
+      "label": "Download chart",
+      "sublabel": "save locally",
+      "sources": [
+        { "path": "AgentService/Code_Interpreter/code_interpreter.ipynb", "line": 243, "end_line": 249, "label": "Retrieve and write file" }
+      ]
+    },
+    {
+      "id": "no_file_result",
+      "lane": "no_file",
+      "col": 4,
+      "width": 112,
+      "type": "external",
+      "label": "No file",
+      "sublabel": "print fallback",
+      "sources": [
+        { "path": "AgentService/Code_Interpreter/code_interpreter.ipynb", "line": 243, "end_line": 251, "label": "Conditional file handling" }
+      ]
+    }
+  ],
+  "edges": [
+    { "id": "setup-upload", "from": "setup", "to": "upload_csv", "label": "client + local CSV", "variant": "default" },
+    { "id": "upload-files", "from": "upload_csv", "to": "files_service", "label": "upload file", "variant": "emphasis" },
+    { "id": "file-agent", "from": "files_service", "to": "agent_version", "label": "attach file ID", "variant": "default" },
+    { "id": "upload-agent", "from": "upload_csv", "to": "create_agent", "label": "file ID returned", "variant": "default" },
+    { "id": "define-agent", "from": "create_agent", "to": "agent_version", "label": "model + tool definition", "variant": "emphasis" },
+    { "id": "agent-conversation", "from": "agent_version", "to": "create_conversation", "label": "agent ready", "variant": "default" },
+    { "id": "conversation-ask", "from": "create_conversation", "to": "ask_for_chart", "label": "conversation ID", "variant": "default" },
+    { "id": "agent-tool", "from": "agent_version", "to": "code_interpreter", "label": "tool + file ID ready", "variant": "default" },
+    { "id": "tool-request", "from": "ask_for_chart", "to": "code_interpreter", "label": "agent can run tool", "variant": "dashed", "role": "branch" },
+    { "id": "ask-response", "from": "ask_for_chart", "to": "inspect_citation", "label": "response + annotations", "variant": "emphasis" },
+    { "id": "citation-download", "from": "inspect_citation", "to": "download_chart", "label": "citation found", "variant": "emphasis" },
+    { "id": "citation-missing", "from": "inspect_citation", "to": "no_file_result", "label": "otherwise", "variant": "security", "role": "branch" }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Keep these file IDs straight",
+      "items": [
+        "Upload ID identifies the CSV attached to the tool.",
+        "Container file citation identifies an output file for retrieval.",
+        "They are different files at different stages."
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "What the notebook code establishes",
+      "items": [
+        "The notebook configures the Code Interpreter tool and requests a chart.",
+        "The file download runs only when a container file citation is found.",
+        "Notebook cells were not executed in this workspace; runtime success is not asserted."
+      ]
+    }
+  ]
+}

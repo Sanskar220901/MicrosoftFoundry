@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - docs/foundry-agent-chat-workflow-interactive.html
+      - .archify/workflow-code-interpreter-20261005-114243/code-interpreter-analysis.html
       - .github/workflows/publish-workflow-diagram.yml
   workflow_dispatch:
 
@@ -37,6 +38,8 @@ jobs:
         run: |
           mkdir -p _site
           cp docs/foundry-agent-chat-workflow-interactive.html _site/index.html
+          mkdir -p _site/code-interpreter
+          cp .archify/workflow-code-interpreter-20261005-114243/code-interpreter-analysis.html _site/code-interpreter/index.html
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v4
