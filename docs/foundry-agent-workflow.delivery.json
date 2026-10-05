@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "5cf2fe20-491c-4624-ba34-461ec9cd4903",
+  "status": "failed",
+  "command": "deliver",
+  "stage": "render",
+  "input": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/.archify/workflow-foundry-agent-chat-20261001-165058/candidate.json",
+  "output": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/docs/foundry-agent-workflow.html",
+  "artifact": {
+    "sha256": "380cae7f7fa4d69615170a999c8d64b828e56f753418469f912ace04602cc714",
+    "bytes": 763868
+  },
+  "error": "Workflow edge \"reply-again\" cannot satisfy route preset \"bottom-channel\" under readable-v2 constraints (minimum 8px endpoint stubs, 16px interior turns, and 28px direct clearance)."
+}

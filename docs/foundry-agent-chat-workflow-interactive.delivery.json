@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "f8758b7c-de20-45dd-9233-1c886d615878",
+  "status": "current",
+  "command": "deliver",
+  "type": "workflow",
+  "input": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/.archify/workflow-foundry-agent-chat-20261001-165058/candidate.json",
+  "output": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/docs/foundry-agent-chat-workflow-interactive.html",
+  "specification": {
+    "sha256": "c727f66914bf868564d34e00bdfa84efab1dfa8bd506bc7a81835e8d593966ae",
+    "bytes": 6011
+  },
+  "artifact": {
+    "sha256": "a8fb36826960f35922a21132994882bd87c18afe9feb3798eb1251de1240d2ca",
+    "bytes": 764200
+  }
+}

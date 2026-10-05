@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "ok": false,
+  "command": "finalize",
+  "status": "fail",
+  "type": "workflow",
+  "quality": "showcase",
+  "specification": {
+    "path": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/.archify/workflow-foundry-agent-chat-20261001-165058/candidate.json",
+    "sha256": "e54d9d276d30f9d4aa968f93a77845af6b1cf4174168fdef7dbc6d686f4974a0",
+    "bytes": 5941
+  },
+  "artifact": {
+    "path": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/docs/foundry-agent-workflow-guide.html",
+    "sha256": "a2a1f8f0e9d5256623502ca26a197ef7fcf43bf344eae4d4c2959b9570dcb9ef",
+    "bytes": 764046
+  },
+  "gates": {
+    "validate": "not-run",
+    "deliver": "fail",
+    "check": "not-run",
+    "browser-check": "not-run"
+  },
+  "failedStage": "deliver",
+  "diagnostics": [
+    {
+      "code": "composition/viewport-height",
+      "severity": "error",
+      "message": "Showcase delivery reported composition/viewport-height; zero warnings are required.",
+      "subject": {
+        "stage": "deliver",
+        "check": "composition"
+      },
+      "evidence": {
+        "reportedSeverity": "warning",
+        "readerFit": null,
+        "viewBoxWidth": 989,
+        "viewBoxHeight": 652,
+        "viewportWidth": 1440,
+        "viewportHeight": 900,
+        "ratio": 1.52,
+        "wideRatio": 1.55,
+        "svgWidthPx": 1346,
+        "svgHeightPx": 887,
+        "fixedChromePx": 126,
+        "pageHeightPx": 1013,
+        "overflowPx": 113
+      },
+      "supportedFixes": [
+        "Preserve every node, relationship, and label. This 989x652 canvas (ratio 1.52) declares no intrinsic-height fit and is below the 1.55 wide ratio, so the desktop Reader can neither narrow it nor accept vertical scroll: it renders 887px tall at the full 1346px width and the page reaches 1013px before cards against 900px, a certain visual-check failure. Either compact vertical spacing so meta.viewBox height is at most 638 at this width, or spread content sideways so the width is at least 1011 at this height; for architecture, omitting meta.viewBox lets the renderer size the canvas and declare the fit."
+      ]
+    }
+  ],
+  "diagnosticSummary": {
+    "total": 1,
+    "shown": 1,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/docs/foundry-agent-workflow-guide.finalize.json",
+    "summaryReceipt": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/docs/foundry-agent-workflow-guide.finalize-summary.json"
+  },
+  "update": {
+    "status": "current",
+    "installedVersion": "3.0.1",
+    "availableVersion": "3.0.1",
+    "releaseNotes": null,
+    "checkedAt": "2026-10-01T20:53:29.502Z",
+    "source": "cache",
+    "noticeRequired": false,
+    "noticeText": null
+  },
+  "visualReview": "not-requested",
+  "durationMs": 965
+}

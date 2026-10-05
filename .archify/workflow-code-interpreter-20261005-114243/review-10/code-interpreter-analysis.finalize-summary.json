@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "ok": false,
+  "command": "finalize",
+  "status": "fail",
+  "type": "workflow",
+  "quality": "showcase",
+  "specification": {
+    "path": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/.archify/workflow-code-interpreter-20261005-114243/candidate.json",
+    "sha256": "a8273897349eb435953606ad93e64e51707fda481fefa410735656250e89e1bb",
+    "bytes": 8083
+  },
+  "artifact": {
+    "path": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/.archify/workflow-code-interpreter-20261005-114243/code-interpreter-analysis.html"
+  },
+  "gates": {
+    "validate": "fail",
+    "deliver": "not-run",
+    "check": "not-run",
+    "browser-check": "not-run"
+  },
+  "failedStage": "validate",
+  "diagnostics": [
+    {
+      "code": "composition/desktop-readability",
+      "severity": "error",
+      "message": "Final artifact failed composition/desktop-readability.",
+      "subject": {
+        "check": "composition",
+        "nodeId": "no_file_result"
+      },
+      "evidence": {
+        "owner": {
+          "kind": "node",
+          "id": "no_file_result"
+        },
+        "viewportWidth": 1440,
+        "viewportHeight": 900,
+        "availableDiagramWidth": 930,
+        "budgetBasis": "legacy-930",
+        "readerContract": "declared-wide-v1",
+        "requestedTargetPx": null,
+        "requestedTargetMet": null,
+        "budgetLimit": "legacy",
+        "viewBoxWidth": 1236,
+        "scale": 0.7524271844660194,
+        "text": "print fallback message",
+        "detail": "context",
+        "sourceFontPx": 7.8,
+        "projectedFontPx": 5.868932038834951,
+        "minimumProjectedFontPx": 6
+      },
+      "supportedFixes": [
+        "Preserve the semantic text and any supplied coordinates, routes, sides, channels, and labels. Compactly reflow automatic spacing and empty corridors so the complete viewBox width is at most 1209px (current 1236px; 7.8px source text at 930px desktop budget). If supplied geometry fixes that width, use a renderer-supported semantic text-size setting or renderer-level fix instead. Position-only label controls cannot repair its projection."
+      ]
+    }
+  ],
+  "diagnosticSummary": {
+    "total": 1,
+    "shown": 1,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/.archify/workflow-code-interpreter-20261005-114243/review-10/code-interpreter-analysis.finalize.json",
+    "summaryReceipt": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/.archify/workflow-code-interpreter-20261005-114243/review-10/code-interpreter-analysis.finalize-summary.json"
+  },
+  "update": {
+    "status": "current",
+    "installedVersion": "3.0.1",
+    "availableVersion": "3.0.1",
+    "releaseNotes": null,
+    "checkedAt": "2026-10-05T15:45:39.181Z",
+    "source": "cache",
+    "noticeRequired": false,
+    "noticeText": null
+  },
+  "visualReview": "not-requested",
+  "durationMs": 674,
+  "nextAction": {
+    "action": "edit-in-place",
+    "candidate": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/.archify/workflow-code-interpreter-20261005-114243/candidate.json",
+    "constraint": "Preserve unaffected semantics and geometry; do not replace the whole candidate.",
+    "then": "finalize-once"
+  }
+}

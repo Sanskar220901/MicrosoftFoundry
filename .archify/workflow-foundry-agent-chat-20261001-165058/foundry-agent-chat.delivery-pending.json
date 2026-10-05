@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "command": "deliver",
+  "status": "pending",
+  "receiptId": "0e455271-113f-4905-a06d-3ef3b1f33ca2",
+  "input": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/.archify/workflow-foundry-agent-chat-20261001-165058/candidate.json",
+  "output": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/.archify/workflow-foundry-agent-chat-20261001-165058/foundry-agent-chat.html"
+}

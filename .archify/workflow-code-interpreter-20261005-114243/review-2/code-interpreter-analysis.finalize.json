@@ -1,0 +1,149 @@
+{
+  "schemaVersion": 1,
+  "ok": false,
+  "command": "finalize",
+  "status": "fail",
+  "type": "workflow",
+  "quality": "showcase",
+  "startedAt": "2026-10-05T15:49:20.161Z",
+  "specification": {
+    "path": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/.archify/workflow-code-interpreter-20261005-114243/candidate.json",
+    "sha256": "a28b609e7f728f1d1b85d48b7516fbd940c7112410291f93ed65dfd15fceef2e",
+    "bytes": 8235
+  },
+  "artifact": {
+    "path": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/.archify/workflow-code-interpreter-20261005-114243/code-interpreter-analysis.html"
+  },
+  "stages": {
+    "validate": {
+      "status": "fail",
+      "exitCode": 1,
+      "durationMs": null,
+      "command": [
+        "/opt/homebrew/Cellar/node/23.9.0/bin/node",
+        "/Users/sanskarsrivastava/.agents/skills/archify/bin/archify.mjs",
+        "deliver",
+        "workflow",
+        "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/.archify/workflow-code-interpreter-20261005-114243/candidate.json",
+        "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/.archify/workflow-code-interpreter-20261005-114243/code-interpreter-analysis.html",
+        "--quality",
+        "showcase",
+        "--repo-root",
+        "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry",
+        "--json"
+      ],
+      "receipt": {
+        "schemaVersion": 1,
+        "ok": false,
+        "command": "deliver",
+        "receiptId": "d917d9f8-b601-4ea8-956b-b0e7bc9892a6",
+        "stage": "render",
+        "type": "workflow",
+        "input": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/.archify/workflow-code-interpreter-20261005-114243/candidate.json",
+        "output": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/.archify/workflow-code-interpreter-20261005-114243/code-interpreter-analysis.html",
+        "error": "Workflow edge \"citation-download\" cannot satisfy route preset \"straight\" under readable-v2 constraints (minimum 8px endpoint stubs, 16px interior turns, and 28px direct clearance).",
+        "diagnostics": [
+          {
+            "code": "workflow/route-preset-conflict",
+            "severity": "error",
+            "message": "Workflow edge \"citation-download\" cannot satisfy route preset \"straight\" under readable-v2 constraints (minimum 8px endpoint stubs, 16px interior turns, and 28px direct clearance).",
+            "subject": {
+              "diagramType": "workflow",
+              "edge": "citation-download",
+              "from": "inspect_citation",
+              "to": "download_chart",
+              "route": "straight"
+            },
+            "evidence": {
+              "attemptedCandidateFamily": "straight",
+              "points": [
+                [
+                  1035.2,
+                  145
+                ],
+                [
+                  1035.2,
+                  465
+                ]
+              ],
+              "fromSide": "bottom",
+              "toSide": "top",
+              "requiredEndpointStubPx": 8,
+              "requiredInteriorSegmentPx": 16,
+              "requiredDirectClearancePx": 28
+            },
+            "supportedFixes": []
+          }
+        ],
+        "provenance": "absent",
+        "update": {
+          "status": "unavailable",
+          "installedVersion": null,
+          "availableVersion": null,
+          "releaseNotes": null,
+          "checkedAt": null,
+          "source": null,
+          "noticeRequired": false,
+          "noticeText": null,
+          "reason": "disabled"
+        }
+      },
+      "execution": "embedded-in-deliver"
+    },
+    "deliver": {
+      "status": "not-run",
+      "execution": "blocked-by-validate"
+    }
+  },
+  "diagnostics": [
+    {
+      "code": "workflow/route-preset-conflict",
+      "severity": "error",
+      "message": "Workflow edge \"citation-download\" cannot satisfy route preset \"straight\" under readable-v2 constraints (minimum 8px endpoint stubs, 16px interior turns, and 28px direct clearance).",
+      "subject": {
+        "diagramType": "workflow",
+        "edge": "citation-download",
+        "from": "inspect_citation",
+        "to": "download_chart",
+        "route": "straight"
+      },
+      "evidence": {
+        "attemptedCandidateFamily": "straight",
+        "points": [
+          [
+            1035.2,
+            145
+          ],
+          [
+            1035.2,
+            465
+          ]
+        ],
+        "fromSide": "bottom",
+        "toSide": "top",
+        "requiredEndpointStubPx": 8,
+        "requiredInteriorSegmentPx": 16,
+        "requiredDirectClearancePx": 28
+      },
+      "supportedFixes": []
+    }
+  ],
+  "evidence": {
+    "receipt": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/.archify/workflow-code-interpreter-20261005-114243/review-2/code-interpreter-analysis.finalize.json",
+    "summaryReceipt": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/.archify/workflow-code-interpreter-20261005-114243/review-2/code-interpreter-analysis.finalize-summary.json"
+  },
+  "visualReview": "not-requested",
+  "failedStage": "validate",
+  "finishedAt": "2026-10-05T15:49:20.803Z",
+  "durationMs": 641,
+  "update": {
+    "status": "current",
+    "installedVersion": "3.0.1",
+    "availableVersion": "3.0.1",
+    "releaseNotes": null,
+    "checkedAt": "2026-10-05T15:45:39.181Z",
+    "source": "cache",
+    "noticeRequired": false,
+    "noticeText": null
+  }
+}

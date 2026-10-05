@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "207d5070-0bb9-4683-b5d1-9e5c9f39d177",
+  "status": "current",
+  "command": "deliver",
+  "type": "workflow",
+  "input": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/.archify/workflow-code-interpreter-20261005-114243/candidate.json",
+  "output": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/.archify/workflow-code-interpreter-20261005-114243/code-interpreter-analysis.html",
+  "specification": {
+    "sha256": "65e3e11b16c4d0d3dfe55fd02693d901128cb4e10cdcdd0b227006981c27818a",
+    "bytes": 8075
+  },
+  "artifact": {
+    "sha256": "b18276d4a4550671afd8b3268ea0f95d00d48ccea724ff3b0487769f41987768",
+    "bytes": 772296
+  }
+}

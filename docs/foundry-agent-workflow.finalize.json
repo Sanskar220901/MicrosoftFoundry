@@ -1,0 +1,167 @@
+{
+  "schemaVersion": 1,
+  "ok": false,
+  "command": "finalize",
+  "status": "fail",
+  "type": "workflow",
+  "quality": "showcase",
+  "startedAt": "2026-10-01T20:56:18.320Z",
+  "specification": {
+    "path": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/.archify/workflow-foundry-agent-chat-20261001-165058/candidate.json",
+    "sha256": "181969ac8d02906e9baef37fcb0b0bfaa293598adf807bf8d9672ea37b78b355",
+    "bytes": 6043
+  },
+  "artifact": {
+    "path": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/docs/foundry-agent-workflow.html",
+    "sha256": "380cae7f7fa4d69615170a999c8d64b828e56f753418469f912ace04602cc714",
+    "bytes": 763868
+  },
+  "stages": {
+    "validate": {
+      "status": "fail",
+      "exitCode": 1,
+      "durationMs": null,
+      "command": [
+        "/opt/homebrew/Cellar/node/23.9.0/bin/node",
+        "/Users/sanskarsrivastava/.agents/skills/archify/bin/archify.mjs",
+        "deliver",
+        "workflow",
+        "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/.archify/workflow-foundry-agent-chat-20261001-165058/candidate.json",
+        "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/docs/foundry-agent-workflow.html",
+        "--quality",
+        "showcase",
+        "--repo-root",
+        "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry",
+        "--json"
+      ],
+      "receipt": {
+        "schemaVersion": 1,
+        "ok": false,
+        "command": "deliver",
+        "receiptId": "5cf2fe20-491c-4624-ba34-461ec9cd4903",
+        "stage": "render",
+        "type": "workflow",
+        "input": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/.archify/workflow-foundry-agent-chat-20261001-165058/candidate.json",
+        "output": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/docs/foundry-agent-workflow.html",
+        "error": "Workflow edge \"reply-again\" cannot satisfy route preset \"bottom-channel\" under readable-v2 constraints (minimum 8px endpoint stubs, 16px interior turns, and 28px direct clearance).",
+        "diagnostics": [
+          {
+            "code": "workflow/route-preset-conflict",
+            "severity": "error",
+            "message": "Workflow edge \"reply-again\" cannot satisfy route preset \"bottom-channel\" under readable-v2 constraints (minimum 8px endpoint stubs, 16px interior turns, and 28px direct clearance).",
+            "subject": {
+              "diagramType": "workflow",
+              "edge": "reply-again",
+              "from": "show_reply",
+              "to": "enter_message",
+              "route": "bottom-channel"
+            },
+            "evidence": {
+              "attemptedCandidateFamily": "bottom-channel",
+              "points": [
+                [
+                  896.8,
+                  145
+                ],
+                [
+                  896.8,
+                  425
+                ],
+                [
+                  776.8,
+                  425
+                ],
+                [
+                  776.8,
+                  393
+                ]
+              ],
+              "fromSide": "bottom",
+              "toSide": "bottom",
+              "requiredEndpointStubPx": 8,
+              "requiredInteriorSegmentPx": 16,
+              "requiredDirectClearancePx": 28
+            },
+            "supportedFixes": []
+          }
+        ],
+        "provenance": "failed",
+        "update": {
+          "status": "unavailable",
+          "installedVersion": null,
+          "availableVersion": null,
+          "releaseNotes": null,
+          "checkedAt": null,
+          "source": null,
+          "noticeRequired": false,
+          "noticeText": null,
+          "reason": "disabled"
+        }
+      },
+      "execution": "embedded-in-deliver"
+    },
+    "deliver": {
+      "status": "not-run",
+      "execution": "blocked-by-validate"
+    }
+  },
+  "diagnostics": [
+    {
+      "code": "workflow/route-preset-conflict",
+      "severity": "error",
+      "message": "Workflow edge \"reply-again\" cannot satisfy route preset \"bottom-channel\" under readable-v2 constraints (minimum 8px endpoint stubs, 16px interior turns, and 28px direct clearance).",
+      "subject": {
+        "diagramType": "workflow",
+        "edge": "reply-again",
+        "from": "show_reply",
+        "to": "enter_message",
+        "route": "bottom-channel"
+      },
+      "evidence": {
+        "attemptedCandidateFamily": "bottom-channel",
+        "points": [
+          [
+            896.8,
+            145
+          ],
+          [
+            896.8,
+            425
+          ],
+          [
+            776.8,
+            425
+          ],
+          [
+            776.8,
+            393
+          ]
+        ],
+        "fromSide": "bottom",
+        "toSide": "bottom",
+        "requiredEndpointStubPx": 8,
+        "requiredInteriorSegmentPx": 16,
+        "requiredDirectClearancePx": 28
+      },
+      "supportedFixes": []
+    }
+  ],
+  "evidence": {
+    "receipt": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/docs/foundry-agent-workflow.finalize.json",
+    "summaryReceipt": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/docs/foundry-agent-workflow.finalize-summary.json"
+  },
+  "visualReview": "not-requested",
+  "failedStage": "validate",
+  "finishedAt": "2026-10-01T20:56:18.990Z",
+  "durationMs": 669,
+  "update": {
+    "status": "current",
+    "installedVersion": "3.0.1",
+    "availableVersion": "3.0.1",
+    "releaseNotes": null,
+    "checkedAt": "2026-10-01T20:53:29.502Z",
+    "source": "cache",
+    "noticeRequired": false,
+    "noticeText": null
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "ok": false,
+  "command": "finalize",
+  "status": "fail",
+  "type": "workflow",
+  "quality": "showcase",
+  "specification": {
+    "path": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/.archify/workflow-code-interpreter-20261005-114243/candidate.json",
+    "sha256": "9caed76025a88cdd3322590e317cbf9a794ab035c3e962d19e841d4e93601742",
+    "bytes": 8175
+  },
+  "artifact": {
+    "path": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/.archify/workflow-code-interpreter-20261005-114243/code-interpreter-analysis.html"
+  },
+  "gates": {
+    "validate": "fail",
+    "deliver": "not-run",
+    "check": "not-run",
+    "browser-check": "not-run"
+  },
+  "failedStage": "validate",
+  "diagnostics": [
+    {
+      "code": "composition/ambiguous-corridor",
+      "severity": "error",
+      "message": "[composition/ambiguous-corridor] showcase workflow edges[5] id \"conversation-ask\" \"create_conversation\" -> \"ask_for_chart\" shares a 16px corridor with edges[9] id \"tool-request\" \"ask_for_chart\" -> \"code_interpreter\" at [825.2, 119] -> [841.2, 119] (segments 0 and 0; minimum 8px) — adjust route/via, bias, or channel coordinates so unrelated edges do not visually merge.",
+      "subject": {
+        "diagramType": "workflow",
+        "collection": "edges",
+        "index": 5,
+        "id": "conversation-ask",
+        "from": "create_conversation",
+        "to": "ask_for_chart"
+      },
+      "evidence": {
+        "otherRelationship": {
+          "diagramType": "workflow",
+          "collection": "edges",
+          "index": 9,
+          "id": "tool-request",
+          "from": "ask_for_chart",
+          "to": "code_interpreter"
+        },
+        "overlapLengthPx": 16,
+        "minimumPx": 8,
+        "from": [
+          825.2,
+          119
+        ],
+        "to": [
+          841.2,
+          119
+        ],
+        "segmentIndex": 0,
+        "otherSegmentIndex": 0
+      },
+      "supportedFixes": [
+        "adjust route/via, bias, or channel coordinates so unrelated edges do not visually merge"
+      ]
+    }
+  ],
+  "diagnosticSummary": {
+    "total": 1,
+    "shown": 1,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/.archify/workflow-code-interpreter-20261005-114243/review-3/code-interpreter-analysis.finalize.json",
+    "summaryReceipt": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/.archify/workflow-code-interpreter-20261005-114243/review-3/code-interpreter-analysis.finalize-summary.json"
+  },
+  "update": {
+    "status": "current",
+    "installedVersion": "3.0.1",
+    "availableVersion": "3.0.1",
+    "releaseNotes": null,
+    "checkedAt": "2026-10-05T15:45:39.181Z",
+    "source": "cache",
+    "noticeRequired": false,
+    "noticeText": null
+  },
+  "visualReview": "not-requested",
+  "durationMs": 541,
+  "nextAction": {
+    "action": "edit-in-place",
+    "candidate": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/.archify/workflow-code-interpreter-20261005-114243/candidate.json",
+    "constraint": "Preserve unaffected semantics and geometry; do not replace the whole candidate.",
+    "then": "finalize-once"
+  }
+}

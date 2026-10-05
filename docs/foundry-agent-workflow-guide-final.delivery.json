@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "ec16a086-b384-4f7f-b25c-0482bdb07da8",
+  "status": "failed",
+  "command": "deliver",
+  "stage": "render",
+  "input": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/.archify/workflow-foundry-agent-chat-20261001-165058/candidate.json",
+  "output": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/docs/foundry-agent-workflow-guide-final.html",
+  "artifact": {
+    "sha256": "75d74a1256eea2b56d0dc4330535fba0ea34cfe400bbfcf8ca0eb53a53092905",
+    "bytes": 764022
+  },
+  "error": "Workflow layout validation failed:\n- [composition/ambiguous-corridor] showcase workflow edges[0] id \"agent-conversation\" \"create_agent\" -> \"open_conversation\" shares a 21px corridor with edges[2] id \"conversation-input\" \"open_conversation\" -> \"enter_message\" at [698.8, 145] -> [698.8, 166] (segments 2 and 0; minimum 8px) — if the authored route/fromSide/toSide are not required by the user, remove them so the renderer can re-plan; otherwise preserve that intent and adjust route/via, bias, or channel coordinates so unrelated edges do not visually merge.\n- [composition/ambiguous-corridor] showcase workflow edges[0] id \"agent-conversation\" \"create_agent\" -> \"open_conversation\" shares a 51px corridor with edges[6] id \"project-agent\" \"connect_project\" -> \"create_agent\" at [566.8, 166] -> [566.8, 217] (segments 0 and 0; minimum 8px) — if the authored route/fromSide/toSide are not required by the user, remove them so the renderer can re-plan; otherwise preserve that intent and adjust route/via, bias, or channel coordinates so unrelated edges do not visually merge."
+}

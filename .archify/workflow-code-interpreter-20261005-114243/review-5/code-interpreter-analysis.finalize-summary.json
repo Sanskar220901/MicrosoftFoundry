@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 1,
+  "ok": false,
+  "command": "finalize",
+  "status": "fail",
+  "type": "workflow",
+  "quality": "showcase",
+  "specification": {
+    "path": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/.archify/workflow-code-interpreter-20261005-114243/candidate.json",
+    "sha256": "d4544029731e346ad0bc3a47d43e71fbb5b9cbe59f67705585c9d436bba73005",
+    "bytes": 8214
+  },
+  "artifact": {
+    "path": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/.archify/workflow-code-interpreter-20261005-114243/code-interpreter-analysis.html"
+  },
+  "gates": {
+    "validate": "fail",
+    "deliver": "not-run",
+    "check": "not-run",
+    "browser-check": "not-run"
+  },
+  "failedStage": "validate",
+  "diagnostics": [
+    {
+      "code": "workflow/explicit-pin-conflict",
+      "severity": "error",
+      "message": "Workflow edge \"tool-request\" has explicit geometry that violates explicit route-route crossing.",
+      "subject": {
+        "diagramType": "workflow",
+        "edge": "tool-request",
+        "from": "ask_for_chart",
+        "to": "code_interpreter"
+      },
+      "evidence": {
+        "invariant": "explicit route-route crossing",
+        "conflictingPins": [
+          {
+            "edge": "tool-request",
+            "field": "fromSide",
+            "path": "/edges/8/fromSide",
+            "value": "bottom"
+          },
+          {
+            "edge": "tool-request",
+            "field": "toSide",
+            "path": "/edges/8/toSide",
+            "value": "top"
+          }
+        ],
+        "point": [
+          1170.4,
+          161
+        ],
+        "segmentIndex": 1,
+        "otherSegmentIndex": 1,
+        "routeSegments": [
+          {
+            "edge": "citation-download",
+            "from": [
+              1170.4,
+              119
+            ],
+            "to": [
+              1170.4,
+              491
+            ]
+          },
+          {
+            "edge": "tool-request",
+            "from": [
+              903.2,
+              161
+            ],
+            "to": [
+              1555.6,
+              161
+            ]
+          }
+        ],
+        "sourceRouteSegments": [
+          {
+            "edge": "citation-download",
+            "from": [
+              1170.4,
+              119
+            ],
+            "to": [
+              1170.4,
+              491
+            ]
+          },
+          {
+            "edge": "tool-request",
+            "from": [
+              903.2,
+              161
+            ],
+            "to": [
+              1555.6,
+              161
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "diagnosticSummary": {
+    "total": 1,
+    "shown": 1,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/.archify/workflow-code-interpreter-20261005-114243/review-5/code-interpreter-analysis.finalize.json",
+    "summaryReceipt": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/.archify/workflow-code-interpreter-20261005-114243/review-5/code-interpreter-analysis.finalize-summary.json"
+  },
+  "update": {
+    "status": "current",
+    "installedVersion": "3.0.1",
+    "availableVersion": "3.0.1",
+    "releaseNotes": null,
+    "checkedAt": "2026-10-05T15:45:39.181Z",
+    "source": "cache",
+    "noticeRequired": false,
+    "noticeText": null
+  },
+  "visualReview": "not-requested",
+  "durationMs": 803,
+  "nextAction": {
+    "action": "edit-in-place",
+    "candidate": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/.archify/workflow-code-interpreter-20261005-114243/candidate.json",
+    "constraint": "Preserve unaffected semantics and geometry; do not replace the whole candidate.",
+    "then": "finalize-once"
+  }
+}

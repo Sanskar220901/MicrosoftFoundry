@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 1,
+  "ok": false,
+  "command": "finalize",
+  "status": "fail",
+  "type": "workflow",
+  "quality": "showcase",
+  "startedAt": "2026-10-05T15:50:23.839Z",
+  "specification": {
+    "path": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/.archify/workflow-code-interpreter-20261005-114243/candidate.json",
+    "sha256": "2bf376741af9fdb7ebda49d561206c53dabc50abe68dedece345676883960ead",
+    "bytes": 8175
+  },
+  "artifact": {
+    "path": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/.archify/workflow-code-interpreter-20261005-114243/code-interpreter-analysis.html"
+  },
+  "stages": {
+    "validate": {
+      "status": "fail",
+      "exitCode": 1,
+      "durationMs": null,
+      "command": [
+        "/opt/homebrew/Cellar/node/23.9.0/bin/node",
+        "/Users/sanskarsrivastava/.agents/skills/archify/bin/archify.mjs",
+        "deliver",
+        "workflow",
+        "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/.archify/workflow-code-interpreter-20261005-114243/candidate.json",
+        "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/.archify/workflow-code-interpreter-20261005-114243/code-interpreter-analysis.html",
+        "--quality",
+        "showcase",
+        "--repo-root",
+        "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry",
+        "--json"
+      ],
+      "receipt": {
+        "schemaVersion": 1,
+        "ok": false,
+        "command": "deliver",
+        "receiptId": "f98b8d79-7e26-474f-b261-5b72b9a2a884",
+        "stage": "render",
+        "type": "workflow",
+        "input": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/.archify/workflow-code-interpreter-20261005-114243/candidate.json",
+        "output": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/.archify/workflow-code-interpreter-20261005-114243/code-interpreter-analysis.html",
+        "error": "Workflow layout validation failed:\n- [composition/ambiguous-corridor] showcase workflow edges[3] id \"citation-download\" \"inspect_citation\" -> \"download_chart\" shares a 177.2px corridor with edges[4] id \"citation-missing\" \"inspect_citation\" -> \"no_file_result\" at [1047.2, 77] -> [1224.4, 77] (segments 1 and 1; minimum 8px) — adjust route/via, bias, or channel coordinates so unrelated edges do not visually merge.",
+        "diagnostics": [
+          {
+            "code": "composition/ambiguous-corridor",
+            "severity": "error",
+            "message": "[composition/ambiguous-corridor] showcase workflow edges[3] id \"citation-download\" \"inspect_citation\" -> \"download_chart\" shares a 177.2px corridor with edges[4] id \"citation-missing\" \"inspect_citation\" -> \"no_file_result\" at [1047.2, 77] -> [1224.4, 77] (segments 1 and 1; minimum 8px) — adjust route/via, bias, or channel coordinates so unrelated edges do not visually merge.",
+            "subject": {
+              "diagramType": "workflow",
+              "collection": "edges",
+              "index": 3,
+              "id": "citation-download",
+              "from": "inspect_citation",
+              "to": "download_chart"
+            },
+            "evidence": {
+              "otherRelationship": {
+                "diagramType": "workflow",
+                "collection": "edges",
+                "index": 4,
+                "id": "citation-missing",
+                "from": "inspect_citation",
+                "to": "no_file_result"
+              },
+              "overlapLengthPx": 177.2,
+              "minimumPx": 8,
+              "from": [
+                1047.2,
+                77
+              ],
+              "to": [
+                1224.4,
+                77
+              ],
+              "segmentIndex": 1,
+              "otherSegmentIndex": 1
+            },
+            "supportedFixes": [
+              "adjust route/via, bias, or channel coordinates so unrelated edges do not visually merge"
+            ]
+          }
+        ],
+        "provenance": "absent",
+        "update": {
+          "status": "unavailable",
+          "installedVersion": null,
+          "availableVersion": null,
+          "releaseNotes": null,
+          "checkedAt": null,
+          "source": null,
+          "noticeRequired": false,
+          "noticeText": null,
+          "reason": "disabled"
+        }
+      },
+      "execution": "embedded-in-deliver"
+    },
+    "deliver": {
+      "status": "not-run",
+      "execution": "blocked-by-validate"
+    }
+  },
+  "diagnostics": [
+    {
+      "code": "composition/ambiguous-corridor",
+      "severity": "error",
+      "message": "[composition/ambiguous-corridor] showcase workflow edges[3] id \"citation-download\" \"inspect_citation\" -> \"download_chart\" shares a 177.2px corridor with edges[4] id \"citation-missing\" \"inspect_citation\" -> \"no_file_result\" at [1047.2, 77] -> [1224.4, 77] (segments 1 and 1; minimum 8px) — adjust route/via, bias, or channel coordinates so unrelated edges do not visually merge.",
+      "subject": {
+        "diagramType": "workflow",
+        "collection": "edges",
+        "index": 3,
+        "id": "citation-download",
+        "from": "inspect_citation",
+        "to": "download_chart"
+      },
+      "evidence": {
+        "otherRelationship": {
+          "diagramType": "workflow",
+          "collection": "edges",
+          "index": 4,
+          "id": "citation-missing",
+          "from": "inspect_citation",
+          "to": "no_file_result"
+        },
+        "overlapLengthPx": 177.2,
+        "minimumPx": 8,
+        "from": [
+          1047.2,
+          77
+        ],
+        "to": [
+          1224.4,
+          77
+        ],
+        "segmentIndex": 1,
+        "otherSegmentIndex": 1
+      },
+      "supportedFixes": [
+        "adjust route/via, bias, or channel coordinates so unrelated edges do not visually merge"
+      ]
+    }
+  ],
+  "evidence": {
+    "receipt": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/.archify/workflow-code-interpreter-20261005-114243/review-6/code-interpreter-analysis.finalize.json",
+    "summaryReceipt": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/.archify/workflow-code-interpreter-20261005-114243/review-6/code-interpreter-analysis.finalize-summary.json"
+  },
+  "visualReview": "not-requested",
+  "failedStage": "validate",
+  "finishedAt": "2026-10-05T15:50:24.379Z",
+  "durationMs": 539,
+  "update": {
+    "status": "current",
+    "installedVersion": "3.0.1",
+    "availableVersion": "3.0.1",
+    "releaseNotes": null,
+    "checkedAt": "2026-10-05T15:45:39.181Z",
+    "source": "cache",
+    "noticeRequired": false,
+    "noticeText": null
+  }
+}

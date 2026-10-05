@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "ok": false,
+  "command": "finalize",
+  "status": "fail",
+  "type": "workflow",
+  "quality": "showcase",
+  "specification": {
+    "path": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/.archify/workflow-foundry-agent-chat-20261001-165058/candidate.json",
+    "sha256": "464607278d73ff981a35d1700b7a7d42cfe33060ff465a3a34343d84a0bd58c8",
+    "bytes": 6011
+  },
+  "artifact": {
+    "path": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/docs/foundry-agent-workflow-guide-final.html",
+    "sha256": "75d74a1256eea2b56d0dc4330535fba0ea34cfe400bbfcf8ca0eb53a53092905",
+    "bytes": 764022
+  },
+  "gates": {
+    "validate": "fail",
+    "deliver": "not-run",
+    "check": "not-run",
+    "browser-check": "not-run"
+  },
+  "failedStage": "validate",
+  "diagnostics": [
+    {
+      "code": "composition/ambiguous-corridor",
+      "severity": "error",
+      "message": "[composition/ambiguous-corridor] showcase workflow edges[0] id \"agent-conversation\" \"create_agent\" -> \"open_conversation\" shares a 21px corridor with edges[2] id \"conversation-input\" \"open_conversation\" -> \"enter_message\" at [698.8, 145] -> [698.8, 166] (segments 2 and 0; minimum 8px) — if the authored route/fromSide/toSide are not required by the user, remove them so the renderer can re-plan; otherwise preserve that intent and adjust route/via, bias, or channel coordinates so unrelated edges do not visually merge.",
+      "subject": {
+        "diagramType": "workflow",
+        "collection": "edges",
+        "index": 0,
+        "id": "agent-conversation",
+        "from": "create_agent",
+        "to": "open_conversation"
+      },
+      "evidence": {
+        "otherRelationship": {
+          "diagramType": "workflow",
+          "collection": "edges",
+          "index": 2,
+          "id": "conversation-input",
+          "from": "open_conversation",
+          "to": "enter_message"
+        },
+        "overlapLengthPx": 21,
+        "minimumPx": 8,
+        "from": [
+          698.8,
+          145
+        ],
+        "to": [
+          698.8,
+          166
+        ],
+        "segmentIndex": 2,
+        "otherSegmentIndex": 0
+      },
+      "supportedFixes": [
+        "if the authored route/fromSide/toSide are not required by the user, remove them so the renderer can re-plan; otherwise preserve that intent and adjust route/via, bias, or channel coordinates so unrelated edges do not visually merge"
+      ]
+    },
+    {
+      "code": "composition/ambiguous-corridor",
+      "severity": "error",
+      "message": "[composition/ambiguous-corridor] showcase workflow edges[0] id \"agent-conversation\" \"create_agent\" -> \"open_conversation\" shares a 51px corridor with edges[6] id \"project-agent\" \"connect_project\" -> \"create_agent\" at [566.8, 166] -> [566.8, 217] (segments 0 and 0; minimum 8px) — if the authored route/fromSide/toSide are not required by the user, remove them so the renderer can re-plan; otherwise preserve that intent and adjust route/via, bias, or channel coordinates so unrelated edges do not visually merge.",
+      "subject": {
+        "diagramType": "workflow",
+        "collection": "edges",
+        "index": 0,
+        "id": "agent-conversation",
+        "from": "create_agent",
+        "to": "open_conversation"
+      },
+      "evidence": {
+        "otherRelationship": {
+          "diagramType": "workflow",
+          "collection": "edges",
+          "index": 6,
+          "id": "project-agent",
+          "from": "connect_project",
+          "to": "create_agent"
+        },
+        "overlapLengthPx": 51,
+        "minimumPx": 8,
+        "from": [
+          566.8,
+          166
+        ],
+        "to": [
+          566.8,
+          217
+        ],
+        "segmentIndex": 0,
+        "otherSegmentIndex": 0
+      },
+      "supportedFixes": [
+        "if the authored route/fromSide/toSide are not required by the user, remove them so the renderer can re-plan; otherwise preserve that intent and adjust route/via, bias, or channel coordinates so unrelated edges do not visually merge"
+      ]
+    }
+  ],
+  "diagnosticSummary": {
+    "total": 2,
+    "shown": 2,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/docs/foundry-agent-workflow-guide-final.review-3/foundry-agent-workflow-guide-final.finalize.json",
+    "summaryReceipt": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/docs/foundry-agent-workflow-guide-final.review-3/foundry-agent-workflow-guide-final.finalize-summary.json"
+  },
+  "update": {
+    "status": "current",
+    "installedVersion": "3.0.1",
+    "availableVersion": "3.0.1",
+    "releaseNotes": null,
+    "checkedAt": "2026-10-01T20:53:29.502Z",
+    "source": "cache",
+    "noticeRequired": false,
+    "noticeText": null
+  },
+  "visualReview": "not-requested",
+  "durationMs": 539,
+  "nextAction": {
+    "action": "edit-in-place",
+    "candidate": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/.archify/workflow-foundry-agent-chat-20261001-165058/candidate.json",
+    "constraint": "Preserve unaffected semantics and geometry; do not replace the whole candidate.",
+    "then": "finalize-once"
+  }
+}

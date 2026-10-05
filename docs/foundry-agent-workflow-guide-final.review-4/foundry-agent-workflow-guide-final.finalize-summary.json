@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "ok": false,
+  "command": "finalize",
+  "status": "fail",
+  "type": "workflow",
+  "quality": "showcase",
+  "specification": {
+    "path": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/.archify/workflow-foundry-agent-chat-20261001-165058/candidate.json",
+    "sha256": "a0f9c7003d39c7865a81288bee5a5fb537f94e1adf3c87541bd3bfb1bd164449",
+    "bytes": 5944
+  },
+  "artifact": {
+    "path": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/docs/foundry-agent-workflow-guide-final.html",
+    "sha256": "75d74a1256eea2b56d0dc4330535fba0ea34cfe400bbfcf8ca0eb53a53092905",
+    "bytes": 764022
+  },
+  "gates": {
+    "validate": "not-run",
+    "deliver": "fail",
+    "check": "not-run",
+    "browser-check": "not-run"
+  },
+  "failedStage": "deliver",
+  "diagnostics": [
+    {
+      "code": "output/target-indeterminate",
+      "severity": "error",
+      "message": "The HTML artifact target identity could not be determined safely.",
+      "subject": {
+        "output": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/docs/foundry-agent-workflow-guide-final.html",
+        "role": "HTML artifact"
+      },
+      "evidence": {
+        "targetState": {
+          "code": "delivery-candidate-changed-during-verification",
+          "filePath": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/docs/.archify-delivery-NmJzyc/foundry-agent-workflow-guide-final.html"
+        }
+      },
+      "supportedFixes": [
+        "use an ordinary local filesystem path with stable file identity, then retry"
+      ]
+    }
+  ],
+  "diagnosticSummary": {
+    "total": 1,
+    "shown": 1,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/docs/foundry-agent-workflow-guide-final.review-4/foundry-agent-workflow-guide-final.finalize.json",
+    "summaryReceipt": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/docs/foundry-agent-workflow-guide-final.review-4/foundry-agent-workflow-guide-final.finalize-summary.json"
+  },
+  "update": {
+    "status": "current",
+    "installedVersion": "3.0.1",
+    "availableVersion": "3.0.1",
+    "releaseNotes": null,
+    "checkedAt": "2026-10-01T20:53:29.502Z",
+    "source": "cache",
+    "noticeRequired": false,
+    "noticeText": null
+  },
+  "visualReview": "not-requested",
+  "durationMs": 687
+}
