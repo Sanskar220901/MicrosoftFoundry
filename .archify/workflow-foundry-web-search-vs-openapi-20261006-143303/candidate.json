@@ -1,0 +1,192 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Foundry Agent Tool Selection: Web Search vs OpenAPI",
+    "locale": "en",
+    "quality_profile": "showcase",
+    "output": ".archify/workflow-foundry-web-search-vs-openapi-20261006-143303/foundry-web-search-vs-openapi.html",
+    "repository": {
+      "url": "https://github.com/Sanskar220901/MicrosoftFoundry.git",
+      "provider": "github",
+      "link_mode": "web",
+      "revision": "5e4b8201402e91022818a70e9484f43e49380a92"
+    }
+  },
+  "lanes": [
+    { "id": "request", "label": "User Request" },
+    { "id": "agent", "label": "Foundry Agent" },
+    { "id": "web", "label": "Public Web Retrieval" },
+    { "id": "api", "label": "Defined API Operation" }
+  ],
+  "phases": [
+    { "id": "understand", "label": "Understand", "fromCol": 0, "toCol": 2 },
+    { "id": "execute", "label": "Execute selected tool", "fromCol": 3, "toCol": 4, "variant": "emphasis" },
+    { "id": "answer", "label": "Answer", "fromCol": 5, "toCol": 5 }
+  ],
+  "groups": [
+    { "id": "web_path", "label": "Broad, current information", "lane": "web", "fromCol": 3, "toCol": 4, "variant": "emphasis" },
+    { "id": "api_path", "label": "Known service contract", "lane": "api", "fromCol": 3, "toCol": 4, "variant": "dashed" }
+  ],
+  "mainPath": ["question", "agent_runtime", "tool_choice", "web_tool", "web_sources", "grounded_answer"],
+  "semanticChecks": {
+    "allowedRoots": ["question"],
+    "allowedTerminals": ["grounded_answer", "structured_result"],
+    "requiredPaths": [
+      { "from": "question", "to": "grounded_answer" },
+      { "from": "question", "to": "structured_result" }
+    ]
+  },
+  "nodes": [
+    {
+      "id": "question",
+      "lane": "request",
+      "col": 0,
+      "type": "external",
+      "label": "User Question",
+      "sublabel": "information or action",
+      "width": 132,
+      "sources": [
+        { "path": "AgentService/Web_Search/webSearch.ipynb", "line": 274, "end_line": 285, "label": "Web query invocation" },
+        { "path": "AgentService/OpenAPI_Tool/openapi.ipynb", "line": 197, "end_line": 207, "label": "API query invocation" }
+      ]
+    },
+    {
+      "id": "agent_runtime",
+      "lane": "agent",
+      "col": 1,
+      "type": "backend",
+      "label": "Foundry Agent",
+      "sublabel": "model + tools",
+      "width": 132,
+      "sources": [
+        { "path": "AgentService/Web_Search/webSearch.ipynb", "line": 160, "end_line": 169, "label": "Web agent definition" },
+        { "path": "AgentService/OpenAPI_Tool/openapi.ipynb", "line": 134, "end_line": 143, "label": "OpenAPI agent definition" }
+      ]
+    },
+    {
+      "id": "tool_choice",
+      "lane": "agent",
+      "col": 2,
+      "type": "messagebus",
+      "label": "Choose Tool",
+      "sublabel": "match intent to tool",
+      "width": 132,
+      "sources": [
+        { "path": "AgentService/Web_Search/webSearch.ipynb", "line": 160, "end_line": 169, "label": "Web tool attached" },
+        { "path": "AgentService/OpenAPI_Tool/openapi.ipynb", "line": 136, "end_line": 143, "label": "OpenAPI tool attached" }
+      ]
+    },
+    {
+      "id": "web_tool",
+      "lane": "web",
+      "col": 3,
+      "type": "cloud",
+      "label": "Web Search Tool",
+      "sublabel": "current public web",
+      "tag": "retrieval",
+      "width": 132,
+      "sources": [
+        { "path": "AgentService/Web_Search/webSearch.ipynb", "line": 160, "end_line": 169, "label": "WebSearchPreviewTool" }
+      ]
+    },
+    {
+      "id": "web_sources",
+      "lane": "web",
+      "col": 4,
+      "type": "external",
+      "label": "Public Web Sources",
+      "sublabel": "relevant pages",
+      "width": 132,
+      "sources": [
+        { "path": "AgentService/Web_Search/webSearch.ipynb", "line": 264, "end_line": 269, "label": "Example cited sources" }
+      ]
+    },
+    {
+      "id": "grounded_answer",
+      "lane": "web",
+      "col": 5,
+      "type": "frontend",
+      "label": "Grounded Answer",
+      "sublabel": "answer + citations",
+      "width": 132,
+      "sources": [
+        { "path": "AgentService/Web_Search/webSearch.ipynb", "line": 274, "end_line": 285, "label": "Response output" }
+      ]
+    },
+    {
+      "id": "openapi_tool",
+      "lane": "api",
+      "col": 3,
+      "type": "messagebus",
+      "label": "OpenAPI Tool",
+      "sublabel": "declared operation + auth",
+      "tag": "integration",
+      "width": 132,
+      "sources": [
+        { "path": "AgentService/OpenAPI_Tool/openapi.ipynb", "line": 103, "end_line": 116, "label": "Tool configuration" }
+      ]
+    },
+    {
+      "id": "api_endpoint",
+      "lane": "api",
+      "col": 4,
+      "type": "external",
+      "label": "API Endpoint",
+      "sublabel": "GetCurrentWeather",
+      "width": 132,
+      "sources": [
+        { "path": "AgentService/OpenAPI_Tool/weather_openapi.json", "line": 8, "end_line": 24, "label": "Server and operation" }
+      ]
+    },
+    {
+      "id": "structured_result",
+      "lane": "api",
+      "col": 5,
+      "type": "frontend",
+      "label": "API Result",
+      "sublabel": "data or action result",
+      "width": 132,
+      "sources": [
+        { "path": "AgentService/OpenAPI_Tool/openapi.ipynb", "line": 197, "end_line": 207, "label": "Weather result output" },
+        { "path": "AgentService/OpenAPI_Tool/weather_openapi.json", "line": 40, "end_line": 53, "label": "Response contract" }
+      ]
+    }
+  ],
+  "edges": [
+    { "id": "request_agent", "from": "question", "to": "agent_runtime", "label": "ask", "variant": "default" },
+    { "id": "agent_decides", "from": "agent_runtime", "to": "tool_choice", "label": "interpret intent", "variant": "default" },
+    { "id": "choose_web", "from": "tool_choice", "to": "web_tool", "label": "public knowledge", "variant": "emphasis", "role": "main" },
+    { "id": "search_web", "from": "web_tool", "to": "web_sources", "label": "search", "variant": "emphasis" },
+    { "id": "synthesize_web", "from": "web_sources", "to": "grounded_answer", "label": "ground + cite", "variant": "emphasis" },
+    { "id": "choose_api", "from": "tool_choice", "to": "openapi_tool", "label": "known service", "variant": "dashed", "role": "branch" },
+    { "id": "call_api", "from": "openapi_tool", "to": "api_endpoint", "label": "HTTP operation", "variant": "dashed" },
+    { "id": "return_api", "from": "api_endpoint", "to": "structured_result", "label": "structured response", "variant": "dashed" }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Use Web Search when",
+      "items": [
+        "The source is the broad public web",
+        "Fresh information and citations matter"
+      ]
+    },
+    {
+      "dot": "violet",
+      "title": "Use OpenAPI when",
+      "items": [
+        "A specific service exposes a defined contract",
+        "The agent must retrieve structured data or take an allowed action"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Why they can look similar",
+      "items": [
+        "Both are tools selected by the same agent runtime",
+        "A search API can be wrapped with OpenAPI, but it remains an API integration"
+      ]
+    }
+  ]
+}
