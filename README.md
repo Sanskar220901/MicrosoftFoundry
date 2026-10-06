@@ -5,3 +5,4 @@
 ## Documentation
 
 - [Foundry Web Search vs OpenAPI Tool](docs/foundry-web-search-vs-openapi.md)
+- [Microsoft Foundry Tools vs Toolbox](docs/foundry-tools-vs-toolbox.md)

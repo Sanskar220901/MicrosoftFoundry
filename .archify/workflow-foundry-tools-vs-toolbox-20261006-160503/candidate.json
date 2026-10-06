@@ -1,0 +1,167 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Microsoft Foundry: Direct Tools vs Toolbox",
+    "locale": "en",
+    "quality_profile": "showcase",
+    "output": ".archify/workflow-foundry-tools-vs-toolbox-20261006-160503/foundry-tools-vs-toolbox.html"
+  },
+  "lanes": [
+    { "id": "design", "label": "Design Choice" },
+    { "id": "direct", "label": "Direct Tool Integration" },
+    { "id": "toolbox", "label": "Managed Toolbox" },
+    { "id": "runtime", "label": "Agent Consumption" }
+  ],
+  "phases": [
+    { "id": "need", "label": "Identify need", "fromCol": 0, "toCol": 1 },
+    { "id": "configure", "label": "Configure", "fromCol": 2, "toCol": 3, "variant": "emphasis" },
+    { "id": "consume", "label": "Attach and run", "fromCol": 4, "toCol": 5 }
+  ],
+  "groups": [
+    { "id": "direct_path", "label": "Simple, agent-specific setup", "lane": "direct", "fromCol": 2, "toCol": 3, "variant": "dashed" },
+    { "id": "toolbox_path", "label": "Reusable, governed capability set", "lane": "toolbox", "fromCol": 2, "toCol": 4, "variant": "emphasis" }
+  ],
+  "mainPath": ["capability_need", "integration_choice", "toolbox_draft", "central_config", "published_toolbox", "shared_consumers"],
+  "semanticChecks": {
+    "allowedRoots": ["capability_need"],
+    "allowedTerminals": ["single_agent", "shared_consumers"],
+    "requiredPaths": [
+      { "from": "capability_need", "to": "single_agent" },
+      { "from": "capability_need", "to": "shared_consumers" }
+    ]
+  },
+  "nodes": [
+    {
+      "id": "capability_need",
+      "lane": "design",
+      "col": 0,
+      "type": "external",
+      "label": "Capability Needed",
+      "sublabel": "search, API, browser, files",
+      "width": 132
+    },
+    {
+      "id": "integration_choice",
+      "lane": "design",
+      "col": 1,
+      "type": "messagebus",
+      "label": "Choose Integration",
+      "sublabel": "direct or reusable",
+      "width": 132
+    },
+    {
+      "id": "individual_tool",
+      "lane": "direct",
+      "col": 2,
+      "type": "backend",
+      "label": "Individual Tool",
+      "sublabel": "one capability definition",
+      "tag": "direct",
+      "width": 132
+    },
+    {
+      "id": "direct_connection",
+      "lane": "direct",
+      "col": 3,
+      "type": "security",
+      "label": "Project Connection",
+      "sublabel": "endpoint + credentials",
+      "width": 132
+    },
+    {
+      "id": "agent_definition",
+      "lane": "direct",
+      "col": 4,
+      "type": "backend",
+      "label": "Agent Definition",
+      "sublabel": "tool attached directly",
+      "width": 132
+    },
+    {
+      "id": "single_agent",
+      "lane": "runtime",
+      "col": 5,
+      "type": "frontend",
+      "label": "One Agent Run",
+      "sublabel": "agent invokes tool",
+      "width": 132,
+      "yOffset": -45
+    },
+    {
+      "id": "toolbox_draft",
+      "lane": "toolbox",
+      "col": 2,
+      "type": "messagebus",
+      "label": "Toolbox Draft",
+      "sublabel": "curated tool collection",
+      "tag": "managed",
+      "width": 132
+    },
+    {
+      "id": "central_config",
+      "lane": "toolbox",
+      "col": 3,
+      "type": "security",
+      "label": "Central Config",
+      "sublabel": "auth + policy + tools",
+      "width": 132
+    },
+    {
+      "id": "published_toolbox",
+      "lane": "toolbox",
+      "col": 4,
+      "type": "cloud",
+      "label": "Published Version",
+      "sublabel": "managed MCP endpoint",
+      "width": 132
+    },
+    {
+      "id": "shared_consumers",
+      "lane": "runtime",
+      "col": 5,
+      "type": "frontend",
+      "label": "Many Consumers",
+      "sublabel": "agents and runtimes",
+      "width": 132,
+      "yOffset": 45
+    }
+  ],
+  "edges": [
+    { "id": "need_choice", "from": "capability_need", "to": "integration_choice", "label": "scope", "variant": "default" },
+    { "id": "choose_direct", "from": "integration_choice", "to": "individual_tool", "label": "one agent", "variant": "dashed", "role": "branch", "fromSide": "right", "toSide": "left" },
+    { "id": "tool_uses_connection", "from": "individual_tool", "to": "direct_connection", "label": "configure", "variant": "dashed" },
+    { "id": "attach_direct", "from": "direct_connection", "to": "agent_definition", "label": "attach", "variant": "dashed" },
+    { "id": "run_direct", "from": "agent_definition", "to": "single_agent", "label": "invoke", "variant": "dashed" },
+    { "id": "choose_toolbox", "from": "integration_choice", "to": "toolbox_draft", "label": "reuse + govern", "variant": "emphasis", "role": "main", "fromSide": "bottom", "toSide": "left" },
+    { "id": "configure_toolbox", "from": "toolbox_draft", "to": "central_config", "label": "add tools", "variant": "emphasis" },
+    { "id": "publish_toolbox", "from": "central_config", "to": "published_toolbox", "label": "version + publish", "variant": "emphasis" },
+    { "id": "consume_toolbox", "from": "published_toolbox", "to": "shared_consumers", "label": "discover via MCP", "variant": "emphasis" }
+  ],
+  "cards": [
+    {
+      "dot": "orange",
+      "title": "Tool",
+      "items": [
+        "One callable capability such as Web Search, OpenAPI, or Browser Automation",
+        "May require a project connection for endpoint and authentication data"
+      ]
+    },
+    {
+      "dot": "cyan",
+      "title": "Toolbox",
+      "items": [
+        "A managed and versioned collection of tools",
+        "Centralizes credentials, policy, governance, and reuse"
+      ]
+    },
+    {
+      "dot": "violet",
+      "title": "Decision rule",
+      "items": [
+        "Use direct integration for a small agent-specific setup",
+        "Use a toolbox when capabilities must be shared or governed centrally"
+      ]
+    }
+  ]
+}
