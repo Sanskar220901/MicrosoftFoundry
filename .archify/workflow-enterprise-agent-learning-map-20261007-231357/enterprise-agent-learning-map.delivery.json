@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "7763386b-ba5e-4495-b101-37312468d9c3",
+  "status": "current",
+  "command": "deliver",
+  "type": "workflow",
+  "input": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/.archify/workflow-enterprise-agent-learning-map-20261007-231357/candidate.json",
+  "output": "/Users/sanskarsrivastava/Desktop/Foundry/MicrosoftFoundry/.archify/workflow-enterprise-agent-learning-map-20261007-231357/enterprise-agent-learning-map.html",
+  "specification": {
+    "sha256": "2925caffb9eee1864ee263cfe7ff438126fb0eaa8815c0400f0fdd500737ad65",
+    "bytes": 4130
+  },
+  "artifact": {
+    "sha256": "7b1c8189d2ea62184c8c38a9847f2bad0a91711545423aefce9e0b4450189418",
+    "bytes": 759330
+  }
+}
