@@ -1,62 +1,59 @@
-# ! pip install agent-framework-devui==1.0.0b251001
 import os
-from dotenv import load_dotenv
-from agent_framework import ChatAgent
-from agent_framework.azure import AzureAIClient
-from azure.identity.aio import AzureCliCredential
-from agent_framework.devui import serve
-from azure.ai.projects.aio import AIProjectClient
-import asyncio
+from pathlib import Path
 
-# creating a function for agent creation
-async def create_docs_agent(project_endpoint: str, model: str) -> ChatAgent:
-    # Create async Azure credential
+from agent_framework import Agent
+from agent_framework.devui import serve
+from agent_framework.foundry import FoundryChatClient
+from azure.identity import AzureCliCredential
+from dotenv import load_dotenv
+
+
+def create_docs_agent(project_endpoint: str, model: str) -> Agent:
+    """Create a local Agent Framework agent backed by a Foundry model."""
     credential = AzureCliCredential()
-    
-    # creating the Foundry Project Client
-    project_client = AIProjectClient(
-        endpoint=project_endpoint,
-        credential=credential
+    client = FoundryChatClient(
+        project_endpoint=project_endpoint,
+        model=model,
+        credential=credential,
+    )
+    return Agent(
+        client=client,
+        name="docs-agent",
+        instructions="You are a helpful assistant that can help with documentation questions.",
     )
 
-    # creating a conversation using the OpenAI Client
-    openai_client = project_client.get_openai_client()
-    conversation = await openai_client.conversations.create()
-    conversation_id = conversation.id
-    print("Conversation ID: ", conversation_id)
 
-    # Initialize the Azure AI Agent Client
-    chat_client = AzureAIClient(project_client=project_client,
-                                conversation_id=conversation_id,
-                                model_deployment_name=model)
+def load_agent() -> Agent:
+    # Load the .env stored beside this script, regardless of the shell's working directory.
+    load_dotenv(Path(__file__).with_name(".env"))
 
-    try:
+    # Prefer the current Agent Framework names while accepting names used by older samples.
+    project_endpoint = os.getenv("FOUNDRY_PROJECT_ENDPOINT") or os.getenv("AI_FOUNDRY_PROJECT_ENDPOINT")
+    model = (
+        os.getenv("FOUNDRY_MODEL")
+        or os.getenv("MODEL_DEPLOYMENT_NAME")
+        or os.getenv("AI_FOUNDRY_DEPLOYMENT_NAME")
+    )
 
-        # Create the Docs Agent
-        agent = chat_client.create_agent(
-            name="docs-agent",
-            instructions="You are a helpful assistant that can help with documentation questions."
-        )
+    if not project_endpoint:
+        raise RuntimeError("FOUNDRY_PROJECT_ENDPOINT is not set.")
+    if not model:
+        raise RuntimeError("FOUNDRY_MODEL or MODEL_DEPLOYMENT_NAME is not set.")
 
-        print("✅ Agent created successfully!")
-        return agent
-    except Exception as e:
-        print(f"❌ Failed to create agent: {e}")
-        return None
+    return create_docs_agent(project_endpoint=project_endpoint, model=model)
 
-async def load_agent():
-    load_dotenv()
-    # loading environment variables
-    project_endpoint = os.getenv("AI_FOUNDRY_PROJECT_ENDPOINT")
-    model = os.getenv("AI_FOUNDRY_DEPLOYMENT_NAME")
 
-    agent = await create_docs_agent(project_endpoint=project_endpoint, model=model)
+def main() -> None:
+    agent = load_agent()
+    serve(
+        entities=[agent],
+        host="127.0.0.1",
+        port=8080,
+        auto_open=True,
+        instrumentation_enabled=True,
+        auth_enabled=False,
+    )
 
-    return agent
-
-def main():
-    agent = asyncio.run(load_agent()) 
-    serve(entities=[agent], auto_open=True, tracing_enabled=True)
 
 if __name__ == "__main__":
     main()
